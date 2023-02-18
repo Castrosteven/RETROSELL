@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "./Navbar";
 export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="h-screen min-h-screen flex flex-col">
