@@ -1,13 +1,13 @@
-import { Product } from "@/pages/Data/type";
+import { Product } from "@/__generated__/graphql";
 import Image from "next/image";
 
-export const Card = ({ console, img, lowestPrice, name }: Product) => {
+export const Card = ({ console, image, price, name, consoleId }: Product) => {
   return (
     <div className="bg-white border-teal-600 border-2 rounded-md flex flex-col items-center h-auto w-full">
       <div className="p-5">
         <Image
           alt={name}
-          src={img}
+          src={image}
           style={{
             objectFit: "fill",
           }}
@@ -27,7 +27,7 @@ export const Card = ({ console, img, lowestPrice, name }: Product) => {
             <span>
               <Image
                 src="/128/Nintendo 64.png"
-                alt={console}
+                alt={consoleId}
                 width={40}
                 height={40}
               />
@@ -35,7 +35,7 @@ export const Card = ({ console, img, lowestPrice, name }: Product) => {
           </div>
           <div className="flex items-center justify-between">
             <button className="text-white font-semibold">Visit Sellers</button>
-            <div className="text-lg">${lowestPrice}</div>
+            <div className="text-lg">${price}</div>
           </div>
         </div>
       </div>

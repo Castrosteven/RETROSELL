@@ -1,6 +1,6 @@
-import { Section, Field } from "@/pages/Data/type";
 import { useState } from "react";
 import Slider from "@mui/material/Slider";
+import { Section } from "../__generated__/graphql";
 function valuetext(value: number) {
   return `$ ${value}`;
 }
@@ -31,26 +31,24 @@ const PriceRangeSlider = () => {
   );
 };
 
-const SectionComponent = ({ field }: { field: Field }) => {
+const SectionComponent = ({ field }: { field: Section }) => {
   return (
     <div>
-      <div className="text-xl font-semibold underline">
-        {field.heading.name}
-      </div>
+      <div className="text-xl font-semibold underline">{field.name}</div>
       <div className="flex flex-col gap-2 mt-2">
-        {field.options.map((option) => {
-          if (option.type === "boolean") {
+        {field.fields.map((option) => {
+          if (option.type === "BOOLEAN") {
             return (
-              <div className="flex justify-between gap-10" key={option.id}>
+              <div className="flex justify-between gap-10" key={option.name}>
                 <div>{option.name}</div>{" "}
                 <div>
                   <input type="checkbox" className="w-5 h-5 accent-teal-600 " />
                 </div>
               </div>
             );
-          } else if (option.type === "pricerange") {
+          } else if (option.type === "PRICERANGE") {
             return (
-              <div className="flex flex-col gap-2" key={option.id}>
+              <div className="flex flex-col gap-2" key={option.name}>
                 <div>{option.name}</div>
                 <div>
                   <PriceRangeSlider />
@@ -64,10 +62,10 @@ const SectionComponent = ({ field }: { field: Field }) => {
   );
 };
 
-export const SideBar = ({ fields }: { fields: Section["fields"] }) => {
+export const SideBar = ({ sections }: { sections: Section[] }) => {
   return (
     <aside className="  rounded-lg bg-white border-teal-600 border-2 p-5 flex gap-5 flex-col ">
-      {fields.map((field, index) => {
+      {sections.map((field, index) => {
         return <SectionComponent key={index} field={field} />;
       })}
     </aside>

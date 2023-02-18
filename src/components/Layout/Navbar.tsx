@@ -42,7 +42,7 @@ export const Navbar = () => {
               return (
                 <Link
                   key={manufacturer.name}
-                  href={`?manufacturer=${manufacturer}`}
+                  href={`?manufacturer=${manufacturer.name}`}
                 >
                   <li>{manufacturer.name}</li>
                 </Link>
