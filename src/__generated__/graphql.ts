@@ -56,6 +56,12 @@ export type AggregateUser = {
   _min?: Maybe<UserMinAggregate>;
 };
 
+export type AuthReturn = {
+  __typename?: 'AuthReturn';
+  token: Scalars['String'];
+  user: User;
+};
+
 export type Console = {
   __typename?: 'Console';
   _count?: Maybe<ConsoleCount>;
@@ -666,6 +672,8 @@ export type Mutation = {
   deleteOneProduct?: Maybe<Product>;
   deleteOneSection?: Maybe<Section>;
   deleteOneUser?: Maybe<User>;
+  signIn: AuthReturn;
+  signup: AuthReturn;
   updateManyConsole: AffectedRowsOutput;
   updateManyManufacturer: AffectedRowsOutput;
   updateManyProduct: AffectedRowsOutput;
@@ -781,6 +789,17 @@ export type MutationDeleteOneSectionArgs = {
 
 export type MutationDeleteOneUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationSignInArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationSignupArgs = {
+  data: UserCreateInput;
 };
 
 
@@ -2089,6 +2108,7 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
+  password: Scalars['String'];
   phoneNumber?: Maybe<Scalars['String']>;
   products: Array<Product>;
   role: Array<UserType>;
@@ -2115,6 +2135,7 @@ export type UserCountAggregate = {
   email: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['Int'];
+  password: Scalars['Int'];
   phoneNumber: Scalars['Int'];
   role: Scalars['Int'];
 };
@@ -2123,6 +2144,7 @@ export type UserCountOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   phoneNumber?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
 };
@@ -2131,6 +2153,7 @@ export type UserCreateInput = {
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
+  password: Scalars['String'];
   phoneNumber?: InputMaybe<Scalars['String']>;
   products?: InputMaybe<ProductCreateNestedManyWithoutSellerInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -2140,6 +2163,7 @@ export type UserCreateManyInput = {
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
+  password: Scalars['String'];
   phoneNumber?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<UserCreateroleInput>;
 };
@@ -2159,6 +2183,7 @@ export type UserCreateWithoutProductsInput = {
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
+  password: Scalars['String'];
   phoneNumber?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<UserCreateroleInput>;
 };
@@ -2175,6 +2200,7 @@ export type UserGroupBy = {
   email: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
+  password: Scalars['String'];
   phoneNumber?: Maybe<Scalars['String']>;
   role?: Maybe<Array<UserType>>;
 };
@@ -2184,6 +2210,7 @@ export type UserMaxAggregate = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
@@ -2191,6 +2218,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   phoneNumber?: InputMaybe<SortOrder>;
 };
 
@@ -2199,6 +2227,7 @@ export type UserMinAggregate = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
@@ -2206,6 +2235,7 @@ export type UserMinOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   phoneNumber?: InputMaybe<SortOrder>;
 };
 
@@ -2216,6 +2246,7 @@ export type UserOrderByWithAggregationInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   phoneNumber?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
 };
@@ -2224,6 +2255,7 @@ export type UserOrderByWithRelationInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrder>;
   phoneNumber?: InputMaybe<SortOrder>;
   products?: InputMaybe<ProductOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
@@ -2238,6 +2270,7 @@ export enum UserScalarFieldEnum {
   Email = 'email',
   Id = 'id',
   Name = 'name',
+  Password = 'password',
   PhoneNumber = 'phoneNumber',
   Role = 'role'
 }
@@ -2249,6 +2282,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: InputMaybe<StringWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
+  password?: InputMaybe<StringWithAggregatesFilter>;
   phoneNumber?: InputMaybe<StringNullableWithAggregatesFilter>;
   role?: InputMaybe<EnumUserTypeNullableListFilter>;
 };
@@ -2261,6 +2295,7 @@ export enum UserType {
 export type UserUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
   phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   products?: InputMaybe<ProductUpdateManyWithoutSellerNestedInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -2269,6 +2304,7 @@ export type UserUpdateInput = {
 export type UserUpdateManyMutationInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
   phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
 };
@@ -2284,6 +2320,7 @@ export type UserUpdateOneRequiredWithoutProductsNestedInput = {
 export type UserUpdateWithoutProductsInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
   phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
 };
@@ -2305,6 +2342,7 @@ export type UserWhereInput = {
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringFilter>;
   phoneNumber?: InputMaybe<StringNullableFilter>;
   products?: InputMaybe<ProductListRelationFilter>;
   role?: InputMaybe<EnumUserTypeNullableListFilter>;
@@ -2320,5 +2358,22 @@ export type GetManufacturersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetManufacturersQuery = { __typename?: 'Query', manufacturers: Array<{ __typename?: 'Manufacturer', name: string }> };
 
+export type SignInMutationVariables = Exact<{
+  password: Scalars['String'];
+  email: Scalars['String'];
+}>;
+
+
+export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'AuthReturn', token: string } };
+
+export type SignupMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthReturn', token: string } };
+
 
 export const GetManufacturersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetManufacturers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"manufacturers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetManufacturersQuery, GetManufacturersQueryVariables>;
+export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
+export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;

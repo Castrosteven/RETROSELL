@@ -1,9 +1,9 @@
+import { SignupForm } from "@/components/Login/SignUpForm";
+
 const Login = () => {
   return (
-    <div>
-      <div>
-        <input type="email" placeholder="Enter Email" required />
-      </div>
+    <div className="flex items-center justify-center h-full ">
+      <SignupForm />
     </div>
   );
 };

@@ -3,15 +3,15 @@ import { Card } from "../components/Card";
 import { GetServerSideProps } from "next";
 import client from "@/lib/apolloClient";
 import { gql } from "@apollo/client";
-import { Console, Product, Section } from "@/__generated__/graphql";
+import { Product, Section } from "@/__generated__/graphql";
 
 export default function Home({
   products,
-  consoles,
+
   sections,
 }: {
   products: Product[];
-  consoles: Console[];
+
   sections: Section[];
 }) {
   return (
@@ -31,7 +31,6 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  let consoles;
   let sections;
   let products;
   const sectionResponse = await client.query({
@@ -50,17 +49,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
   sections = sectionResponse.data.sections;
   if (query.manufacturer !== undefined) {
-    const consoleResponse = await client.query({
-      query: gql`
-        {
-          consoles(
-            where: { manufacturer: { is: { name: { equals: "${query.manufacturer}" } } } }
-          ) {
-            name
-          }
-        }
-      `,
-    });
     const productResponse = await client.query({
       query: gql`
         {
@@ -83,16 +71,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       `,
     });
     products = productResponse.data.products;
-    consoles = consoleResponse.data.consoles;
   } else {
-    consoles = [];
     products = [];
   }
 
   return {
     props: {
       products: products,
-      consoles: consoles,
       sections: sections,
     },
   };
